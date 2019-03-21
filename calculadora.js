@@ -1,27 +1,53 @@
+var suma = false;
+var resta = false;
+var multiplicacion = false;
+var division = false;
 
-var numero = "";
-function mostrarValor(num){
-  numero += num; //creamos una variable que concatene los numeros ingresados
-  document.getElementById("valorIngresado").value = numero;
-
-}
-function mostrarOperador(operador){
-  numero += operador;
-  document.getElementById("valorIngresado").value = numero;
+var cargarPagina = function(){
+  $(".btn").click(pintarValor);
+  $()
+  $("#botonIgual").click(btnIgualClick);
 }
 
-function elegirOperador(){
-  var suma = document.getElementById("botonSuma").value;
-  var resta = document.getElementById("botonResta").value;
-  if (operador == suma){
-    resultado = Number(num1 + num2);
-    return resultado;
-  }
-  else if (operador == resta){
-    resultado = Number(num1 - num2);
-    return resultado
-  }
-}
-function mostrarResultado(){
 
+var contValor = '';
+function pintarValor(){
+  var valorIngresado = this.value;
+  contValor += valorIngresado
+  $("#valorIngresado").val(contValor);
 }
+
+function btnIgualClick(){
+  evaluarOperacion()
+} 
+
+function evaluarOperacion(){
+  let contValorInput = $("#valorIngresado").val();
+  console.log(contValorInput);
+  var quitarIgual = contValorInput.substr(0, contValorInput.length - 1);
+  console.log(quitarIgual);
+ 
+  var primerNumero = quitarIgual.substr(0, quitarIgual.lastIndexOf("+"));
+  console.log(primerNumero);
+  var segundoNumero = quitarIgual.substr(quitarIgual.lastIndexOf("+") + 1);
+  console.log(segundoNumero);
+}
+
+function sumar(num1, num2){
+  var result =  num1 + num2;
+  return result;
+}
+function restar(num1, num2){
+  var result = num1 - num2;
+  return result;
+}
+function dividir(){
+  var result = num1 / num2;
+  return result;
+}
+function multiplicar(){
+  var result = num1 * num2;
+  return result;
+}
+
+$(document).ready(cargarPagina);
